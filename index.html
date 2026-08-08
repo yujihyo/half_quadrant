@@ -41,7 +41,7 @@
 
                     <h2>제목</h2>
 
-                    <input type="text" id="input-title" maxlength="50" value="배우자 사분면">
+                    <input type="text" id="input-title" maxlength="50" value="지우고 새로 적어주세요" class="default-value">
 
                 </section>
 
@@ -57,7 +57,7 @@
 
                         위
 
-                        <input type="text" id="input-axis-top" maxlength="30" value="가부장">
+                        <input type="text" id="input-axis-top" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -66,7 +66,7 @@
 
                         아래
 
-                        <input type="text" id="input-axis-bottom" maxlength="30" value="조신함">
+                        <input type="text" id="input-axis-bottom" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -75,7 +75,7 @@
 
                         왼쪽
 
-                        <input type="text" id="input-axis-left" maxlength="30" value="착취당함">
+                        <input type="text" id="input-axis-left" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -84,7 +84,7 @@
 
                         오른쪽
 
-                        <input type="text" id="input-axis-right" maxlength="30" value="착취함">
+                        <input type="text" id="input-axis-right" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -102,7 +102,7 @@
 
                         왼쪽 위
 
-                        <input type="text" id="input-quad-tl" maxlength="30" value="남편계">
+                        <input type="text" id="input-quad-tl" maxlength="30" value="생략가능" class="default-value">
 
                     </label>
 
@@ -111,7 +111,7 @@
 
                         오른쪽 위
 
-                        <input type="text" id="input-quad-tr" maxlength="30" value="놈편계">
+                        <input type="text" id="input-quad-tr" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -120,7 +120,7 @@
 
                         왼쪽 아래
 
-                        <input type="text" id="input-quad-bl" maxlength="30" value="마누라계">
+                        <input type="text" id="input-quad-bl" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -129,7 +129,7 @@
 
                         오른쪽 아래
 
-                        <input type="text" id="input-quad-br" maxlength="30" value="서방계">
+                        <input type="text" id="input-quad-br" maxlength="30" value="" class="default-value">
 
                     </label>
 
@@ -160,6 +160,16 @@
                         <input type="file" class="stickerUpload" accept=".png,image/png">
 
                     </div>
+
+                </section>
+
+                <section class="editor-section">
+
+                    <h2>출처</h2>
+
+                    <label>
+                        <input type="text" id="source-input" placeholder="작가님">
+                    </label>
 
                 </section>
 
@@ -227,28 +237,48 @@
                     <!-- 분면 텍스트 -->
 
                     <div id="quad-tl" class="editable-text quadrant-text quad-tl" data-target="quad-tl">
-                        남편계
+
                     </div>
 
 
                     <div id="quad-tr" class="editable-text quadrant-text quad-tr" data-target="quad-tr">
-                        놈편계
+
                     </div>
 
 
                     <div id="quad-bl" class="editable-text quadrant-text quad-bl" data-target="quad-bl">
-                        마누라계
+
                     </div>
 
 
                     <div id="quad-br" class="editable-text quadrant-text quad-br" data-target="quad-br">
-                        서방계
+
                     </div>
 
 
                 </div>
 
+                <!-- 모바일 스티커 추가 -->
+
+                <button type="button" id="mobile-sticker-add" aria-label="스티커 추가">
+                    ＋
+                </button>
+
+                <input type="file" id="mobile-sticker-upload" accept=".png,image/png" hidden>
+
                 <div id="stickerLayer"></div>
+
+                <div id="source-credit">
+
+                    <div class="source-user editable-text" data-target="source">
+                        ⓒ<span id="source-text"></span>
+                    </div>
+
+                    <div class="source-fixed">
+                        @1kcalmayo2
+                    </div>
+
+                </div>
 
             </div>
 

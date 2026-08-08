@@ -87,6 +87,14 @@ input {
     margin-bottom: 28px;
 }
 
+.editor-section input.default-value {
+    color: #999999;
+}
+
+.editor-section input.user-value {
+    color: #111111;
+}
+
 
 .editor-section h2 {
     margin: 0 0 12px;
@@ -336,6 +344,8 @@ input {
     white-space: nowrap;
 
     z-index: 5;
+
+    color: #ccc;
 }
 
 
@@ -469,20 +479,20 @@ input {
 
 .handle.br {
 
-    right:-6px;
-    bottom:-6px;
+    right: -6px;
+    bottom: -6px;
 
-    background:#4f8cff;
+    background: #4f8cff;
 
-    cursor:nwse-resize;
+    cursor: nwse-resize;
 
 }
 
 .handle.tl,
 .handle.tr,
-.handle.bl{
+.handle.bl {
 
-    pointer-events:none;
+    pointer-events: none;
 
 }
 
@@ -490,95 +500,142 @@ input {
    Sticker Upload
 =========================== */
 
-.sticker-header{
+.sticker-header {
 
-    display:flex;
+    display: flex;
 
-    justify-content:space-between;
+    justify-content: space-between;
 
-    align-items:center;
+    align-items: center;
 
-    margin-bottom:12px;
-
-}
-
-.sticker-header h2{
-
-    margin:0;
+    margin-bottom: 12px;
 
 }
 
-.sticker-count{
+.sticker-header h2 {
 
-    display:flex;
-
-    gap:6px;
+    margin: 0;
 
 }
 
-.sticker-count button{
+.sticker-count {
 
-    width:26px;
-    height:26px;
+    display: flex;
 
-    border:none;
-
-    border-radius:4px;
-
-    background:#222;
-
-    color:white;
-
-    cursor:pointer;
+    gap: 6px;
 
 }
 
-#stickerUploads{
+.sticker-count button {
 
-    display:flex;
+    width: 26px;
+    height: 26px;
 
-    flex-direction:column;
+    border: none;
 
-    gap:10px;
+    border-radius: 4px;
 
-}
+    background: #222;
 
-.delete-button{
+    color: white;
 
-    position:absolute;
-
-    left:-12px;
-    top:-12px;
-
-    width:24px;
-    height:24px;
-
-    border-radius:50%;
-
-    background:#ff4d4f;
-
-    color:#fff;
-
-    font-size:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    cursor:pointer;
-
-    display:none;
-
-    z-index:10;
+    cursor: pointer;
 
 }
 
-.sticker.selected .delete-button{
+#stickerUploads {
 
-    display:flex;
+    display: flex;
 
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.delete-button {
+
+    position: absolute;
+
+    left: -12px;
+    top: -12px;
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: #ff4d4f;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    display: none;
+
+    z-index: 10;
+
+}
+
+.sticker.selected .delete-button {
+
+    display: flex;
+
+}
+
+/* =========================
+   출처
+========================= */
+
+#source-credit {
+    position: absolute;
+
+    top: 28px;
+    right: 28px;
+
+    color: #ccc;
+
+    width: max-content;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.35;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    z-index: 20;
+}
+
+.source-fixed,
+.source-user {
+    text-align: right;
+}
+
+.source-user {
+    min-height: 1.35em;
+}
+
+.source-fixed {
+    color: #dedede;
+}
+
+/* =========================
+   Mobile Sticker Add
+========================= */
+
+#mobile-sticker-add {
+    display: none;
 }
 
 /* =========================
@@ -622,15 +679,11 @@ input {
 
 
     #capture-area {
-        width: min(
-            100vw - 30px,
-            900px
-        );
+        width: min(100vw - 30px,
+                900px);
 
-        height: min(
-            100vw - 30px,
-            980px
-        );
+        height: min(100vw - 30px,
+                980px);
 
         transform-origin: top center;
     }
@@ -640,11 +693,9 @@ input {
         top: 5.3%;
         left: 6.1%;
 
-        font-size: clamp(
-            18px,
-            4.45vw,
-            40px
-        );
+        font-size: clamp(18px,
+                4.45vw,
+                40px);
     }
 
 
@@ -658,20 +709,16 @@ input {
 
 
     .axis {
-        font-size: clamp(
-            13px,
-            3vw,
-            27px
-        );
+        font-size: clamp(13px,
+                3vw,
+                27px);
     }
 
 
     .quadrant-text {
-        font-size: clamp(
-            15px,
-            3.45vw,
-            31px
-        );
+        font-size: clamp(15px,
+                3.45vw,
+                31px);
     }
 
 
@@ -682,6 +729,40 @@ input {
 
     .editable-text:active {
         opacity: 0.5;
+    }
+
+    #mobile-sticker-add {
+
+        display: flex;
+
+        position: absolute;
+
+        top: 72px;
+        right: 24px;
+
+        width: 42px;
+        height: 42px;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+
+        border: 0;
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.92);
+
+        color: #111111;
+
+        font-size: 28px;
+        font-weight: 300;
+
+        line-height: 1;
+
+        cursor: pointer;
+
+        z-index: 100;
     }
 
 }

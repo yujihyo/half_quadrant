@@ -23,9 +23,9 @@ function initPreview() {
 
 
 
-/* =========================
+/* ===========================
    모바일 텍스트 수정
-========================= */
+=========================== */
 
 function handleMobileEdit(event) {
 
@@ -42,11 +42,32 @@ function handleMobileEdit(event) {
         element.dataset.target;
 
 
-    if (!target) return;
+    if (!target) {
+        return;
+    }
 
 
-    const currentValue =
+    let currentValue =
         element.textContent;
+
+
+    /*
+     * 출처는 앞의 ⓒ를 제외하고
+     * 실제 입력된 텍스트만 가져온다.
+     */
+    if (target === "source") {
+
+        const sourceText =
+            document.getElementById(
+                "source-text"
+            );
+
+        currentValue =
+            sourceText
+                ? sourceText.textContent
+                : "";
+
+    }
 
 
     const newValue =
@@ -65,7 +86,9 @@ function handleMobileEdit(event) {
         newValue.trim();
 
 
-    let displayValue = value;
+    let displayValue =
+        value;
+
 
     if (
         target === "axis-left" ||
@@ -74,7 +97,10 @@ function handleMobileEdit(event) {
 
         if (value.length > 7) {
 
-            const mid = Math.ceil(value.length / 2);
+            const mid =
+                Math.ceil(
+                    value.length / 2
+                );
 
             displayValue =
                 value.slice(0, mid) +
@@ -85,13 +111,40 @@ function handleMobileEdit(event) {
 
     }
 
-    element.textContent = displayValue;
+
+    /*
+     * 출처
+     */
+
+    if (target === "source") {
+
+        const sourceText =
+            document.getElementById(
+                "source-text"
+            );
+
+        if (sourceText) {
+
+            sourceText.textContent =
+                value;
+
+        }
+
+    } else {
+
+        element.textContent =
+            displayValue;
+
+    }
 
 
     updateSidebarInput(
         target,
         value
     );
+
+
+    saveState();
 
 }
 
@@ -163,16 +216,16 @@ function initStickerManager() {
 
 }
 
-function bindStickerUploads(){
+function bindStickerUploads() {
 
     document
-    .querySelectorAll(".stickerUpload")
-    .forEach(input=>{
+        .querySelectorAll(".stickerUpload")
+        .forEach(input => {
 
-        input.onchange=
-            handleStickerUpload;
+            input.onchange =
+                handleStickerUpload;
 
-    });
+        });
 
 }
 
@@ -242,7 +295,7 @@ function removeStickerUpload() {
 
     const input =
         uploads[
-            uploads.length - 1
+        uploads.length - 1
         ];
 
     // 연결된 스티커 삭제
@@ -274,11 +327,15 @@ function removeStickerUpload() {
 
         delete input.dataset.stickerId;
 
+        saveState();
+
         return;
 
     }
 
     input.remove();
+
+    saveState();
 
 }
 
@@ -336,6 +393,8 @@ function handleStickerUpload(event) {
 
         sticker.dataset.uploadId =
             input.dataset.uploadId;
+
+        saveState();
 
     };
 
@@ -538,6 +597,8 @@ function deleteSticker(sticker) {
     // 스티커 삭제
     sticker.remove();
 
+    saveState();
+
 }
 
 /* ===========================
@@ -696,17 +757,31 @@ function enableStickerDrag(sticker) {
             pointerUp
         );
 
+        saveState();
+
     }
 
 }
 
+/* ===========================
+   Select Sticker
+=========================== */
+
 let selectedSticker = null;
 
-
+let stickerZIndex = 1;
 
 function selectSticker(sticker) {
 
-    if (selectedSticker) {
+    if (!sticker) {
+        return;
+    }
+
+    // 이전 선택 해제
+    if (
+        selectedSticker &&
+        selectedSticker !== sticker
+    ) {
 
         selectedSticker.classList.remove(
             "selected"
@@ -720,6 +795,10 @@ function selectSticker(sticker) {
         "selected"
     );
 
+    // 항상 맨 앞으로
+    sticker.style.zIndex =
+        ++stickerZIndex;
+
 }
 
 document
@@ -730,20 +809,20 @@ document
 
         e => {
 
+            // 스티커 클릭이면 해제하지 않음
             if (
-                e.target.id === "capture-area" ||
-                e.target.id === "stickerLayer"
+                e.target.closest(".sticker")
             ) {
+                return;
+            }
 
-                if (selectedSticker) {
+            if (selectedSticker) {
 
-                    selectedSticker.classList.remove(
-                        "selected"
-                    );
+                selectedSticker.classList.remove(
+                    "selected"
+                );
 
-                    selectedSticker = null;
-
-                }
+                selectedSticker = null;
 
             }
 
@@ -861,5 +940,112 @@ function resizeEnd() {
         resizeEnd
     );
 
+    saveState();
+
 }
 
+/* ===========================
+   Source Credit
+=========================== */
+
+function initSourceCredit() {
+
+    const input =
+        document.getElementById(
+            "source-input"
+        );
+
+    const preview =
+        document.getElementById(
+            "source-text"
+        );
+
+    if (!input || !preview) {
+        return;
+    }
+
+    input.addEventListener(
+        "input",
+        () => {
+
+            preview.textContent =
+                input.value;
+
+            saveState();
+
+        }
+    );
+
+}
+
+/* ===========================
+   Mobile Sticker Upload
+=========================== */
+
+function initMobileStickerUpload() {
+
+    const button =
+        document.getElementById(
+            "mobile-sticker-add"
+        );
+
+    const input =
+        document.getElementById(
+            "mobile-sticker-upload"
+        );
+
+    if (!button || !input) {
+        return;
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            input.click();
+
+        }
+    );
+
+
+    input.addEventListener(
+        "change",
+        event => {
+
+            const file =
+                event.target.files[0];
+
+            if (!file) {
+                return;
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload = e => {
+
+                createSticker(
+                    e.target.result
+                );
+
+                saveState();
+
+            };
+
+
+            reader.readAsDataURL(file);
+
+
+            /*
+             * 같은 파일을 다시 선택해도
+             * change 이벤트가 발생하도록 초기화
+             */
+            input.value = "";
+
+        }
+    );
+
+}

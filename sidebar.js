@@ -4,18 +4,48 @@
 
 function initSidebar() {
 
-    const inputs = document.querySelectorAll(
-        "#sidebar input"
-    );
-
+    const inputs =
+        document.querySelectorAll(
+            "#sidebar input[type='text']"
+        );
 
     inputs.forEach(input => {
+
+        input.classList.add(
+            "default-value"
+        );
 
         input.addEventListener(
             "input",
             () => {
 
-                updatePreviewFromInput(input);
+                if (
+                    input.value.trim() === ""
+                ) {
+
+                    input.classList.remove(
+                        "user-value"
+                    );
+
+                    input.classList.add(
+                        "default-value"
+                    );
+
+                } else {
+
+                    input.classList.remove(
+                        "default-value"
+                    );
+
+                    input.classList.add(
+                        "user-value"
+                    );
+
+                }
+
+                updatePreviewFromInput(
+                    input
+                );
 
             }
         );
@@ -64,7 +94,10 @@ function updatePreviewFromInput(input) {
             "quad-bl",
 
         "input-quad-br":
-            "quad-br"
+            "quad-br",
+        
+        "source":
+            "source-input"
 
     };
 
@@ -103,6 +136,8 @@ function updatePreviewFromInput(input) {
     }
 
     target.textContent = displayValue;
+
+    saveState();
 
 }
 
