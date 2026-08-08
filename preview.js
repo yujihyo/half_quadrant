@@ -419,16 +419,12 @@ function createSticker(src) {
     sticker.className =
         "sticker";
 
-    sticker.style.left =
-        "300px";
-
-    sticker.style.top =
-        "300px";
 
     const img =
         document.createElement("img");
 
     img.draggable = false;
+
 
     img.onload = () => {
 
@@ -440,6 +436,7 @@ function createSticker(src) {
         let height =
             img.naturalHeight;
 
+
         const scale =
             Math.min(
                 MAX_SIZE / width,
@@ -447,8 +444,10 @@ function createSticker(src) {
                 1
             );
 
+
         width *= scale;
         height *= scale;
+
 
         sticker.style.width =
             width + "px";
@@ -456,13 +455,48 @@ function createSticker(src) {
         sticker.style.height =
             height + "px";
 
+
+        /* =========================
+           캡처 영역 중앙 배치
+        ========================= */
+
+        const capture =
+            document.getElementById(
+                "capture-area"
+            );
+
+
+        const centerX =
+            (
+                capture.clientWidth -
+                width
+            ) / 2;
+
+
+        const centerY =
+            (
+                capture.clientHeight -
+                height
+            ) / 2;
+
+
+        sticker.style.left =
+            centerX + "px";
+
+        sticker.style.top =
+            centerY + "px";
+
     };
+
 
     img.src = src;
 
     sticker.appendChild(img);
 
-    // ===== 삭제 버튼 =====
+
+    /* =========================
+       삭제 버튼
+    ========================= */
 
     const deleteButton =
         document.createElement("div");
@@ -473,22 +507,19 @@ function createSticker(src) {
     deleteButton.textContent =
         "×";
 
+
     deleteButton.addEventListener(
-
         "pointerdown",
-
         e => {
 
             e.stopPropagation();
 
         }
-
     );
 
+
     deleteButton.addEventListener(
-
         "click",
-
         () => {
 
             deleteSticker(
@@ -496,14 +527,17 @@ function createSticker(src) {
             );
 
         }
-
     );
+
 
     sticker.appendChild(
         deleteButton
     );
 
-    // ===== 핸들 =====
+
+    /* =========================
+       크기 조절 핸들
+    ========================= */
 
     [
         "tl",
@@ -526,17 +560,21 @@ function createSticker(src) {
 
     });
 
+
     layer.appendChild(
         sticker
     );
+
 
     enableStickerDrag(
         sticker
     );
 
+
     selectSticker(
         sticker
     );
+
 
     return sticker;
 

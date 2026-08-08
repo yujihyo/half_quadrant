@@ -94,10 +94,7 @@ function updatePreviewFromInput(input) {
             "quad-bl",
 
         "input-quad-br":
-            "quad-br",
-        
-        "source":
-            "source-input"
+            "quad-br"
 
     };
 

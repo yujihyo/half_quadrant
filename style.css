@@ -646,90 +646,584 @@ input {
     cursor: default;
 }
 
-
-
-/* =========================
-   모바일
-========================= */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 800px) {
 
-    #app {
-        display: block;
+    /* =====================================================
+       기본
+    ===================================================== */
+
+    html,
+    body {
+
+        width: 100%;
+        min-height: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        overflow: hidden;
+
     }
 
+
+    body {
+
+        background: #eeeeee;
+
+    }
+
+
+    /* =====================================================
+       전체 레이아웃
+    ===================================================== */
+
+    #app {
+
+        display: block;
+
+        width: 100%;
+        height: 100dvh;
+        min-height: 100dvh;
+
+        overflow: hidden;
+
+    }
+
+
+    /* =====================================================
+       Sidebar
+    ===================================================== */
 
     #sidebar {
+
         display: none;
+
     }
 
 
+    /* =====================================================
+       Preview Area
+    ===================================================== */
+
     #preview-area {
+
         margin: 0;
 
         width: 100%;
-        min-height: 100vh;
+        height: 100dvh;
+        min-height: 100dvh;
 
-        padding: 15px;
+        padding: 12px;
 
-        overflow: auto;
+        display: flex;
 
-        align-items: flex-start;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
     }
 
+
+    /* =====================================================
+       Capture Area
+
+       화면의 가로/세로 중
+       더 작은 쪽에 맞춰 정사각형으로 축소
+    ===================================================== */
 
     #capture-area {
-        width: min(100vw - 30px,
-                900px);
 
-        height: min(100vw - 30px,
-                980px);
+        width:
+            min(
+                calc(100vw - 24px),
+                calc(100dvh - 24px)
+            );
 
-        transform-origin: top center;
+        height:
+            min(
+                calc(100vw - 24px),
+                calc(100dvh - 24px)
+            );
+
+        max-width: 900px;
+        max-height: 900px;
+
+        flex-shrink: 0;
+
+        position: relative;
+
+        overflow: hidden;
+
     }
 
 
+    /* =====================================================
+       제목
+    ===================================================== */
+
     .title {
+
         top: 5.3%;
         left: 6.1%;
 
-        font-size: clamp(18px,
+        max-width: 82%;
+
+        font-size:
+            clamp(
+                18px,
                 4.45vw,
-                40px);
+                40px
+            );
+
+        line-height: 1;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
     }
 
+
+    /* =====================================================
+       사분면
+    ===================================================== */
 
     #quadrant {
-        left: 4.45%;
-        right: 4.45%;
 
-        top: 16.1%;
-        bottom: 5%;
+        left: 11.1%;
+        right: 11.1%;
+
+        top: 13.5%;
+
+        /*
+         * 반드시 정사각형
+         */
+        width: 77.8%;
+        height: auto;
+
+        aspect-ratio: 1 / 1;
+
     }
 
+
+    /* =====================================================
+       축 간격
+
+       PC의 28px을 모바일 크기에 맞춰 축소
+    ===================================================== */
+
+    :root {
+
+        --axis-gap:
+            clamp(
+                9px,
+                2.8vw,
+                28px
+            );
+
+    }
+
+
+    /* =====================================================
+       축 텍스트
+    ===================================================== */
 
     .axis {
-        font-size: clamp(13px,
+
+        max-width: 26%;
+
+        font-size:
+            clamp(
+                12px,
                 3vw,
-                27px);
+                27px
+            );
+
+        line-height: 1.15;
+
+        text-align: center;
+
+        white-space: pre-line;
+
+        word-break: keep-all;
+
+        overflow-wrap: break-word;
+
     }
 
+
+    /* =====================================================
+       위쪽 축
+    ===================================================== */
+
+    .axis-top {
+
+        left: 50%;
+
+        bottom:
+            calc(
+                100% + var(--axis-gap)
+            );
+
+        transform:
+            translateX(-50%);
+
+    }
+
+
+    /* =====================================================
+       아래쪽 축
+    ===================================================== */
+
+    .axis-bottom {
+
+        left: 50%;
+
+        top:
+            calc(
+                100% + var(--axis-gap)
+            );
+
+        transform:
+            translateX(-50%);
+
+    }
+
+
+    /* =====================================================
+       왼쪽 축
+    ===================================================== */
+
+    .axis-left {
+
+        right:
+            calc(
+                100% + var(--axis-gap)
+            );
+
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+    }
+
+
+    /* =====================================================
+       오른쪽 축
+    ===================================================== */
+
+    .axis-right {
+
+        left:
+            calc(
+                100% + var(--axis-gap)
+            );
+
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+    }
+
+
+    /* =====================================================
+       십자 축
+    ===================================================== */
+
+    .vertical-line {
+
+        width: 2px;
+
+    }
+
+
+    .horizontal-line {
+
+        height: 2px;
+
+    }
+
+
+    /* =====================================================
+       분면 텍스트
+    ===================================================== */
 
     .quadrant-text {
-        font-size: clamp(15px,
+
+        font-size:
+            clamp(
+                15px,
                 3.45vw,
-                31px);
+                31px
+            );
+
+        line-height: 1.15;
+
+        white-space: normal;
+
+        max-width: 38%;
+
+        text-align: center;
+
+        word-break: keep-all;
+
+        overflow-wrap: break-word;
+
+        /*
+         * 빈 분면도 모바일에서
+         * 손가락으로 누를 수 있는 영역 확보
+         */
+
+        min-width: 50px;
+        min-height: 34px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
     }
 
 
+    /* =====================================================
+       분면 위치
+    ===================================================== */
+
+    .quad-tl {
+
+        left: 25%;
+        top: 25%;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+
+    .quad-tr {
+
+        left: 75%;
+        top: 25%;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+
+    .quad-bl {
+
+        left: 25%;
+        top: 75%;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+
+    .quad-br {
+
+        left: 75%;
+        top: 75%;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+
+    /* =====================================================
+       모바일 텍스트 수정
+    ===================================================== */
+
     .editable-text {
+
         cursor: pointer;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
     }
 
 
     .editable-text:active {
+
         opacity: 0.5;
+
     }
+
+
+    /* =====================================================
+       Sticker Layer
+    ===================================================== */
+
+    #stickerLayer {
+
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        z-index: 100;
+
+        pointer-events: none;
+
+    }
+
+
+    /*
+     * sticker 자체는 터치 가능
+     */
+
+    #stickerLayer .sticker {
+
+        pointer-events: auto;
+
+        touch-action: none;
+
+    }
+
+
+    /* =====================================================
+       Sticker
+
+       모바일에서 너무 커지는 것을 방지
+    ===================================================== */
+
+    .sticker {
+
+        max-width: 70%;
+        max-height: 70%;
+
+        touch-action: none;
+
+    }
+
+
+    .sticker img {
+
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+
+        pointer-events: none;
+
+        user-select: none;
+
+        -webkit-user-drag: none;
+
+    }
+
+
+    /* =====================================================
+       Sticker 선택 영역
+    ===================================================== */
+
+    .sticker.selected {
+
+        outline: 2px solid #4f8cff;
+
+        outline-offset: 0;
+
+    }
+
+
+    /* =====================================================
+       Sticker Resize Handle
+    ===================================================== */
+
+    .handle {
+
+        width: 14px;
+        height: 14px;
+
+    }
+
+
+    .handle.tl {
+
+        left: -7px;
+        top: -7px;
+
+    }
+
+
+    .handle.tr {
+
+        right: -7px;
+        top: -7px;
+
+    }
+
+
+    .handle.bl {
+
+        left: -7px;
+        bottom: -7px;
+
+    }
+
+
+    .handle.br {
+
+        right: -7px;
+        bottom: -7px;
+
+        cursor:
+            nwse-resize;
+
+    }
+
+
+    /* =====================================================
+       Sticker Delete
+    ===================================================== */
+
+    .delete-button {
+
+        left: -14px;
+        top: -14px;
+
+        width: 28px;
+        height: 28px;
+
+        font-size: 19px;
+
+        z-index: 20;
+
+    }
+
+
+    /* =====================================================
+       모바일 스티커 추가 버튼
+    ===================================================== */
 
     #mobile-sticker-add {
 
@@ -737,32 +1231,128 @@ input {
 
         position: absolute;
 
-        top: 72px;
-        right: 24px;
+        /*
+         * 출처와 겹치지 않도록
+         * 오른쪽 위에서 조금 아래
+         */
 
-        width: 42px;
-        height: 42px;
+        top: 8.5%;
+        right: 4%;
+
+        width: 38px;
+        height: 38px;
+
+        padding: 0;
 
         align-items: center;
         justify-content: center;
 
-        padding: 0;
-
         border: 0;
         border-radius: 50%;
 
-        background: rgba(255, 255, 255, 0.92);
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.92
+            );
 
         color: #111111;
 
-        font-size: 28px;
+        font-size: 25px;
         font-weight: 300;
 
         line-height: 1;
 
         cursor: pointer;
 
-        z-index: 100;
+        z-index: 200;
+
+        box-shadow:
+            0 1px 5px
+            rgba(
+                0,
+                0,
+                0,
+                0.12
+            );
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    #mobile-sticker-add:active {
+
+        transform: scale(0.92);
+
+    }
+
+
+    /* =====================================================
+       출처
+    ===================================================== */
+
+    #source-credit {
+
+        top: 3%;
+
+        right: 3%;
+
+        max-width: 45%;
+
+        font-size:
+            clamp(
+                9px,
+                1.8vw,
+                14px
+            );
+
+        line-height: 1.35;
+
+        text-align: right;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+    }
+
+
+    .source-user,
+    .source-fixed {
+
+        text-align: right;
+
+        white-space: nowrap;
+
+    }
+
+
+    /* =====================================================
+       모바일에서 출처 터치 가능
+    ===================================================== */
+
+    .source-user {
+
+        cursor: pointer;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    /* =====================================================
+       숨겨진 모바일 파일 입력
+    ===================================================== */
+
+    #mobile-sticker-upload {
+
+        display: none;
+
     }
 
 }
