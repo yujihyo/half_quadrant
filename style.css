@@ -1,0 +1,687 @@
+/* =========================
+   기본
+========================= */
+:root {
+    --axis-gap: 28px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #eeeeee;
+
+    font-family:
+        Arial,
+        "Noto Sans KR",
+        sans-serif;
+}
+
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+
+/* =========================
+   전체 레이아웃
+========================= */
+
+#app {
+    display: flex;
+
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+
+/* =========================
+   Sidebar
+========================= */
+
+#sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 280px;
+    height: 100vh;
+
+    background: #ffffff;
+
+    border-right: 1px solid #dddddd;
+
+    overflow-y: auto;
+
+    z-index: 100;
+}
+
+
+.sidebar-inner {
+    padding: 28px 22px 30px;
+}
+
+
+#sidebar h1 {
+    margin: 0 0 30px;
+
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.editor-section {
+    margin-bottom: 28px;
+}
+
+
+.editor-section h2 {
+    margin: 0 0 12px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.editor-section label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    color: #555555;
+}
+
+
+.editor-section input {
+    display: block;
+
+    width: 100%;
+
+    height: 34px;
+
+    margin-top: 5px;
+
+    padding: 0 9px;
+
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    background: #ffffff;
+}
+
+
+.editor-section input:focus {
+    border-color: #888888;
+}
+
+
+
+/* =========================
+   저장 버튼
+========================= */
+
+#save-button {
+    width: 100%;
+    height: 42px;
+
+    border: 0;
+    border-radius: 5px;
+
+    background: #222222;
+    color: #ffffff;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+#save-button:hover {
+    background: #444444;
+}
+
+
+
+/* =========================
+   Preview Area
+========================= */
+
+#preview-area {
+    margin-left: 280px;
+
+    width: calc(100% - 280px);
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px;
+}
+
+
+
+/* =========================
+   저장 영역
+========================= */
+
+#capture-area {
+    position: relative;
+
+    width: 900px;
+    height: 900px;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    overflow: hidden;
+}
+
+
+
+/* =========================
+   제목
+========================= */
+
+.title {
+    position: absolute;
+
+    top: 48px;
+    left: 55px;
+
+    font-size: 40px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    z-index: 10;
+}
+
+
+
+/* =========================
+   사분면
+========================= */
+
+#quadrant {
+    position: absolute;
+
+    left: 100px;
+    right: 100px;
+
+    top: 100px;
+
+    aspect-ratio: 1 / 1;
+
+    height: auto;
+}
+
+
+/* =========================
+   축
+========================= */
+
+.vertical-line {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background: #111;
+    transform: translateX(-50%);
+}
+
+.horizontal-line {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 50%;
+
+    height: 2px;
+
+    background: #111;
+    transform: translateY(-50%);
+}
+
+
+
+/* =========================
+   축 텍스트
+========================= */
+
+.axis {
+    position: absolute;
+
+    width: auto;
+    max-width: 180px;
+
+    text-align: center;
+    white-space: pre-line;
+    word-break: keep-all;
+}
+
+
+.axis-top {
+    left: 50%;
+    bottom: calc(100% + var(--axis-gap));
+
+    transform: translateX(-50%);
+}
+
+.axis-bottom {
+    left: 50%;
+    top: calc(100% + var(--axis-gap));
+
+    transform: translateX(-50%);
+}
+
+
+.axis-left {
+    right: calc(100% + var(--axis-gap));
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+.axis-right {
+    left: calc(100% + var(--axis-gap));
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+
+/* =========================
+   분면 텍스트
+========================= */
+
+.quadrant-text {
+    position: absolute;
+
+    font-size: 31px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    z-index: 5;
+}
+
+
+.quad-tl {
+    left: 25%;
+    top: 25%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+.quad-tr {
+    left: 75%;
+    top: 25%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+.quad-bl {
+    left: 25%;
+    top: 75%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+.quad-br {
+    left: 75%;
+    top: 75%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+/* ===========================
+   Sticker
+=========================== */
+
+#stickerLayer {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+}
+
+
+
+.sticker {
+
+    position: absolute;
+
+    cursor: grab;
+
+    user-select: none;
+
+    touch-action: none;
+
+}
+
+.sticker.selected {
+
+    outline: 2px solid #4f8cff;
+
+    outline-offset: 0;
+
+}
+
+.sticker img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+}
+
+.handle {
+
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 2px solid #4f8cff;
+
+    box-sizing: border-box;
+
+    display: none;
+
+}
+
+.sticker.selected .handle {
+
+    display: block;
+
+}
+
+.handle.tl {
+
+    left: -6px;
+    top: -6px;
+
+}
+
+.handle.tr {
+
+    right: -6px;
+    top: -6px;
+
+}
+
+.handle.bl {
+
+    left: -6px;
+    bottom: -6px;
+
+}
+
+.handle.br {
+
+    right:-6px;
+    bottom:-6px;
+
+    background:#4f8cff;
+
+    cursor:nwse-resize;
+
+}
+
+.handle.tl,
+.handle.tr,
+.handle.bl{
+
+    pointer-events:none;
+
+}
+
+/* ===========================
+   Sticker Upload
+=========================== */
+
+.sticker-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+}
+
+.sticker-header h2{
+
+    margin:0;
+
+}
+
+.sticker-count{
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+.sticker-count button{
+
+    width:26px;
+    height:26px;
+
+    border:none;
+
+    border-radius:4px;
+
+    background:#222;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+#stickerUploads{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.delete-button{
+
+    position:absolute;
+
+    left:-12px;
+    top:-12px;
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:#ff4d4f;
+
+    color:#fff;
+
+    font-size:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    display:none;
+
+    z-index:10;
+
+}
+
+.sticker.selected .delete-button{
+
+    display:flex;
+
+}
+
+/* =========================
+   모바일 수정 표시
+========================= */
+
+.editable-text {
+    cursor: default;
+}
+
+
+
+/* =========================
+   모바일
+========================= */
+
+@media (max-width: 800px) {
+
+    #app {
+        display: block;
+    }
+
+
+    #sidebar {
+        display: none;
+    }
+
+
+    #preview-area {
+        margin: 0;
+
+        width: 100%;
+        min-height: 100vh;
+
+        padding: 15px;
+
+        overflow: auto;
+
+        align-items: flex-start;
+    }
+
+
+    #capture-area {
+        width: min(
+            100vw - 30px,
+            900px
+        );
+
+        height: min(
+            100vw - 30px,
+            980px
+        );
+
+        transform-origin: top center;
+    }
+
+
+    .title {
+        top: 5.3%;
+        left: 6.1%;
+
+        font-size: clamp(
+            18px,
+            4.45vw,
+            40px
+        );
+    }
+
+
+    #quadrant {
+        left: 4.45%;
+        right: 4.45%;
+
+        top: 16.1%;
+        bottom: 5%;
+    }
+
+
+    .axis {
+        font-size: clamp(
+            13px,
+            3vw,
+            27px
+        );
+    }
+
+
+    .quadrant-text {
+        font-size: clamp(
+            15px,
+            3.45vw,
+            31px
+        );
+    }
+
+
+    .editable-text {
+        cursor: pointer;
+    }
+
+
+    .editable-text:active {
+        opacity: 0.5;
+    }
+
+}

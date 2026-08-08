@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>사분면 에디터</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+     전체 레이아웃
+========================= -->
+
+    <div id="app">
+
+
+        <!-- =========================
+         Sidebar
+    ========================= -->
+
+        <aside id="sidebar">
+
+            <div class="sidebar-inner">
+
+                <h1>사분면 에디터</h1>
+
+
+                <!-- 제목 -->
+
+                <section class="editor-section">
+
+                    <h2>제목</h2>
+
+                    <input type="text" id="input-title" maxlength="50" value="배우자 사분면">
+
+                </section>
+
+
+                <!-- 축 -->
+
+                <section class="editor-section">
+
+                    <h2>축 텍스트</h2>
+
+
+                    <label>
+
+                        위
+
+                        <input type="text" id="input-axis-top" maxlength="30" value="가부장">
+
+                    </label>
+
+
+                    <label>
+
+                        아래
+
+                        <input type="text" id="input-axis-bottom" maxlength="30" value="조신함">
+
+                    </label>
+
+
+                    <label>
+
+                        왼쪽
+
+                        <input type="text" id="input-axis-left" maxlength="30" value="착취당함">
+
+                    </label>
+
+
+                    <label>
+
+                        오른쪽
+
+                        <input type="text" id="input-axis-right" maxlength="30" value="착취함">
+
+                    </label>
+
+                </section>
+
+
+                <!-- 분면 -->
+
+                <section class="editor-section">
+
+                    <h2>분면 텍스트</h2>
+
+
+                    <label>
+
+                        왼쪽 위
+
+                        <input type="text" id="input-quad-tl" maxlength="30" value="남편계">
+
+                    </label>
+
+
+                    <label>
+
+                        오른쪽 위
+
+                        <input type="text" id="input-quad-tr" maxlength="30" value="놈편계">
+
+                    </label>
+
+
+                    <label>
+
+                        왼쪽 아래
+
+                        <input type="text" id="input-quad-bl" maxlength="30" value="마누라계">
+
+                    </label>
+
+
+                    <label>
+
+                        오른쪽 아래
+
+                        <input type="text" id="input-quad-br" maxlength="30" value="서방계">
+
+                    </label>
+
+                </section>
+
+                <section class="editor-section">
+
+                    <div class="sticker-header">
+
+                        <h2>스티커</h2>
+
+                        <div class="sticker-count">
+
+                            <button type="button" id="stickerMinus">
+                                −
+                            </button>
+
+                            <button type="button" id="stickerPlus">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div id="stickerUploads">
+
+                        <input type="file" class="stickerUpload" accept=".png,image/png">
+
+                    </div>
+
+                </section>
+
+                <!-- 저장 -->
+
+                <button type="button" id="save-button">
+                    PNG 저장
+                </button>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =========================
+         Preview
+    ========================= -->
+
+        <main id="preview-area">
+
+            <div id="capture-area">
+
+                <!-- 제목 -->
+
+                <div id="preview-title" class="editable-text title" data-target="title">
+                    배우자 사분면
+                </div>
+
+
+                <!-- 사분면 -->
+
+                <div id="quadrant">
+
+
+                    <!-- 축 -->
+
+                    <div id="axis-top" class="editable-text axis axis-top" data-target="axis-top">
+                        가부장
+                    </div>
+
+
+                    <div id="axis-bottom" class="editable-text axis axis-bottom" data-target="axis-bottom">
+                        조신함
+                    </div>
+
+
+                    <div id="axis-left" class="editable-text axis axis-left" data-target="axis-left">
+                        착취당함
+                    </div>
+
+
+                    <div id="axis-right" class="editable-text axis axis-right" data-target="axis-right">
+                        착취함
+                    </div>
+
+
+                    <!-- 십자 축 -->
+
+                    <div class="vertical-line"></div>
+
+                    <div class="horizontal-line"></div>
+
+
+                    <!-- 분면 텍스트 -->
+
+                    <div id="quad-tl" class="editable-text quadrant-text quad-tl" data-target="quad-tl">
+                        남편계
+                    </div>
+
+
+                    <div id="quad-tr" class="editable-text quadrant-text quad-tr" data-target="quad-tr">
+                        놈편계
+                    </div>
+
+
+                    <div id="quad-bl" class="editable-text quadrant-text quad-bl" data-target="quad-bl">
+                        마누라계
+                    </div>
+
+
+                    <div id="quad-br" class="editable-text quadrant-text quad-br" data-target="quad-br">
+                        서방계
+                    </div>
+
+
+                </div>
+
+                <div id="stickerLayer"></div>
+
+            </div>
+
+        </main>
+
+
+    </div>
+
+
+    <!-- html2canvas -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+    <script src="sidebar.js"></script>
+
+    <script src="preview.js"></script>
+
+    <script src="main.js"></script>
+
+
+</body>
+
+</html>
